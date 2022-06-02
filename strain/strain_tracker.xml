@@ -9,10 +9,10 @@
 	<windowclass name="straintracker">
 		<frame>charsheet</frame>
 		<placement>
-			<size width="695" height="1000" />
+			<size width="695" height="880" />
 		</placement>
 		<sizelimits>
-			<minimum width="695" height="1000" />
+			<minimum width="695" height="880" />
 			<dynamic />
 		</sizelimits>
 		<softclose />
@@ -32,21 +32,17 @@
 				<static textres="strain_tracker_label_body" />
 			</label_charframetop>
 
-			<label_strain_cur name="label_cur_body">
-				<anchored to="body_title" />
-			</label_strain_cur>
-
-			<number_strain_cur name="cur_body" source="strain.body.current">
-				<anchored to="label_cur_body" />
-			</number_strain_cur>
-
 			<label_strain_max name="label_max_body">
 				<anchored to="body_title" />
 			</label_strain_max>
-
 			<number_strain_max name="max_body" source="strain.body.max">
 				<anchored to="label_max_body" />
 			</number_strain_max>
+
+			<button_clearstrain name="button_clearbody">
+				<anchored to="body_title" />
+				<target>body</target>
+			</button_clearstrain>
 
 			<strainlevel name="body_1">
 				<anchored to="body_title" />
@@ -116,19 +112,17 @@
 				<static textres="strain_tracker_label_mind" />
 			</label_charframetop>
 
-			<label_strain_cur name="label_cur_mind">
-				<anchored to="mind_title" />
-			</label_strain_cur>
-			<number_strain_cur name="cur_mind" source="strain.mind.current">
-				<anchored to="label_cur_mind" />
-			</number_strain_cur>
-
 			<label_strain_max name="label_max_mind">
 				<anchored to="mind_title" />
 			</label_strain_max>
 			<number_strain_max name="max_mind" source="strain.mind.max">
 				<anchored to="label_max_mind" />
 			</number_strain_max>
+
+			<button_clearstrain name="button_clearmind">
+				<anchored to="mind_title" />
+				<target>mind</target>
+			</button_clearstrain>
 
 			<strainlevel name="mind_1">
 				<anchored to="mind_title" />
@@ -142,6 +136,7 @@
 				<parameters>
 					<stat>mind</stat>
 					<level>2</level>
+					<automated />
 				</parameters>
 			</strainlevel>
 			<strainlevel name="mind_3">
@@ -188,7 +183,6 @@
 				<parameters>
 					<stat>mind</stat>
 					<level>8</level>
-					<automated />
 				</parameters>
 			</strainlevel>
 
@@ -199,19 +193,17 @@
 				<static textres="strain_tracker_label_soul" />
 			</label_charframetop>
 
-			<label_strain_cur name="label_cur_soul">
-				<anchored to="soul_title" />
-			</label_strain_cur>
-			<number_strain_cur name="cur_soul" source="strain.soul.current">
-				<anchored to="label_cur_soul" />
-			</number_strain_cur>
-
 			<label_strain_max name="label_max_soul">
 				<anchored to="soul_title" />
 			</label_strain_max>
 			<number_strain_max name="max_soul" source="strain.soul.max">
 				<anchored to="label_max_soul" />
 			</number_strain_max>
+
+			<button_clearstrain name="button_clearsoul">
+				<anchored to="soul_title" />
+				<target>soul</target>
+			</button_clearstrain>
 
 			<strainlevel name="soul_1">
 				<anchored to="soul_title" />
@@ -281,22 +273,16 @@
 	</windowclass>
 
 	<windowclass name="strainlevel">
-		<frame name="fielddark" offset="7,5,7,5" />
+		<frame name="fieldlight" offset="7,5,7,5" />
 		<sizelimits>
 			<maximum height="90" />
 			<minimum height="90" />
 		</sizelimits>
 		<script file="strain/scripts/strain_level.lua" />
 		<sheetdata>
-			<overlay name="red">
-				<frame>red</frame>
-			</overlay>
-			<overlay name="green">
-				<frame>green</frame>
-			</overlay>
 			<label_strainlevel name="description" />
 			<icon_automated name="automated" />
-			<windowclicker />
+			<windowclicker name="clicker" />
 		</sheetdata>
 	</windowclass>
 </root>

@@ -6,12 +6,17 @@
 -->
 
 <root>
+	<!-- Turns out using alpha for this is so laggy it's basically unusable -->
 	<framedef name="red">
 		<bitmap file="graphics/frames/red.png" />
 		<offset>0,0,0,0</offset>
 	</framedef>
 	<framedef name="green">
 		<bitmap file="graphics/frames/green.png" />
+		<offset>0,0,0,0</offset>
+	</framedef>
+	<framedef name="gray">
+		<bitmap file="graphics/frames/gray.png" />
 		<offset>0,0,0,0</offset>
 	</framedef>
 </root>

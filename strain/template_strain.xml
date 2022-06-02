@@ -8,17 +8,6 @@
 <root>
 	<template name="strainlevel">
 		<subwindow>
-			<!-- <script>
-				function onClickDown(button, x, y)
-					Debug.chat('subnwindow.onClickDown()');
-					return true;
-				end
-
-				function onClickRelease(button, x, y)
-					Debug.chat('subnwindow.onClickRelease()');
-					return false;
-				end
-			</script> -->
 			<anchored>
 				<top anchor="bottom" relation="relative" offset="2" />
 				<left offset="-6"/>
@@ -28,30 +17,11 @@
 			<activate />
 		</subwindow>
 	</template>
-	<template name="label_strain_cur">
-		<label>
-			<anchored height="20" width="30">
-				<bottom anchor="top" offset="-10" />
-				<left anchor="left" />
-			</anchored>
-			<static textres="strain_tracker_label_cur" />
-		</label>
-	</template>
-	<template name="number_strain_cur">
-		<basicnumber>
-			<anchored height="20" width="30">
-				<top />
-				<left anchor="right" offset="10" />
-			</anchored>
-			<readonly />
-			<min>0</min>
-		</basicnumber>
-	</template>
 	<template name="label_strain_max">
 		<label>
 			<anchored height="20" width="30">
 				<bottom anchor="top" offset="-10" />
-				<left anchor="center" />
+				<left anchor="left" />
 			</anchored>
 			<static textres="strain_tracker_label_max" />
 		</label>
@@ -72,6 +42,21 @@
 			<min>1</min>
 			<max>8</max>
 		</basicnumber>
+	</template>
+	<template name="button_clearstrain">
+		<button_text>
+			<script>
+				function onButtonPress()
+					window.clearStrain(target[1]);
+				end 
+			</script>
+			<anchored height="18">
+				<bottom anchor="top" offset="-10" />
+				<left anchor="center" offset="-5" />
+				<right offset="-5" />
+			</anchored>
+			<state textres="strain_tracker_button_clear" />
+		</button_text>
 	</template>
 
 	<template name="label_strainlevel">
@@ -102,16 +87,25 @@
 	<template name="windowclicker">
 		<genericcontrol>
 			<script>
+				local bEnabled = true;
 				function onInit()
-					setHoverCursor("hand");
+					update(true);
+				end
+				function update(enabled)
+					bEnabled = enabled;
+					if bEnabled then
+						setHoverCursor("hand");
+					else
+						setHoverCursor("arrow");
+					end
 				end
 				function onClickDown(button, x, y)
-					return true;
+					return bEnabled;
 				end
 
 				function onClickRelease(button, x, y)
 					window.onClick();
-					return true;
+					return bEnabled;
 				end
 			</script>
 			<anchored>

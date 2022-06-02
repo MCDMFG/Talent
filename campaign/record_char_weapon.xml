@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	Please see the license.html file included with this distribution for 
+	attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="char_weapon" merge="join">
+		<script>
+			function onInit()
+				super.onInit();
+				local nodeWeapon = getDatabaseNode();
+				local nodeChar = DB.getChild(nodeWeapon, "...");
+				DB.addHandler(DB.getPath(nodeChar, "strain.mind.current"), "onUpdate", onDataChanged);
+			end
+
+			function onClose()
+				super.onClose()
+				local nodeWeapon = getDatabaseNode();
+				local nodeChar = DB.getChild(nodeWeapon, "...");
+				DB.removeHandler(DB.getPath(nodeChar, "strain.mind.current"), "onUpdate", onDataChanged);
+			end
+
+			function onDataChanged()
+				super.onDataChanged();
+			end
+		</script>
+	</windowclass>
+</root>

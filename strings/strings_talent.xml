@@ -7,6 +7,7 @@
 <root>
 	<string name="strain_tracker_button">Strain Tracker</string>
 	<string name="strain_tracker_window_title">Strain</string>
+	<string name="strain_tracker_button_clear">Clear</string>
 	<string name="strain_tracker_label_body">Body</string>
 	<string name="strain_tracker_label_mind">Mind</string>
 	<string name="strain_tracker_label_soul">Soul</string>

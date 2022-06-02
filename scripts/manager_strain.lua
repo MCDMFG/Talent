@@ -20,6 +20,25 @@ function getCurrentStrain(rActor, sType)
 	return DB.getValue(nodeActor, "strain." .. sLower .. ".current", 0);
 end
 
+function setCurrentStrain(rActor, sType, nVal)
+	if type(rActor) == "databasenode" or type(rActor) == "string" then
+        rActor = ActorManager.resolveActor(rActor);
+    end
+
+	if (sType or "") == "" then
+		return 0;
+	end
+
+	local sNodeType, nodeActor = ActorManager.getTypeAndNode(rActor);
+    if not nodeActor then
+        return 0;
+    end
+
+	local sLower = string.lower(sType);
+
+	DB.setValue(nodeActor, "strain." .. sLower .. ".current", "number", nVal);
+end
+
 function getMaxStrain(rActor, sType)
 	if type(rActor) == "databasenode" or type(rActor) == "string" then
         rActor = ActorManager.resolveActor(rActor);
@@ -55,7 +74,7 @@ function getPercentStrained(rActor, sType)
 
 	local sLower = string.lower(sType);
 
-	local nCur = DB.getValue(nodeActor, "strain." .. sLower .. ".cur", 0);
+	local nCur = DB.getValue(nodeActor, "strain." .. sLower .. ".current", 0);
 	local nMax = DB.getValue(nodeActor, "strain." .. sLower .. ".max", 1);
 
 	return nCur/nMax;
@@ -77,7 +96,7 @@ function isAtOrAboveStrainLevel(rActor, sType, nLevel)
 
 	local sLower = string.lower(sType);
 
-	local nCur = DB.getValue(nodeActor, "strain." .. sLower .. ".cur", 0);
+	local nCur = DB.getValue(nodeActor, "strain." .. sLower .. ".current", 0);
 	return nCur >= nLevel;
 end
 
