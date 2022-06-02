@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root version="3.3" release="1.0">
+	<announcement text="Loaded Talent" font="emotefont" />
+	<properties>
+		<name>The Talent</name>
+		<version>0.1</version>
+		<author>Shane Parker and George Taray</author>
+		<description>Support for MCDM's Talent class</description>
+		<ruleset>
+			<name>5E</name>
+		</ruleset>
+	</properties>
+	<base>
+	</base>
+</root>
