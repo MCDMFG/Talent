@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	Please see the license.html file included with this distribution for 
+	attribution and copyright information.
+-->
+
+<root>
+	<framedef name="red">
+		<bitmap file="graphics/frames/red.png" />
+		<offset>0,0,0,0</offset>
+	</framedef>
+	<framedef name="green">
+		<bitmap file="graphics/frames/green.png" />
+		<offset>0,0,0,0</offset>
+	</framedef>
+</root>

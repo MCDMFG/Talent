@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	Please see the license.html file included with this distribution for 
+	attribution and copyright information.
+-->
+
+<root>
+	<template name="strainlevel">
+		<subwindow>
+			<!-- <script>
+				function onClickDown(button, x, y)
+					Debug.chat('subnwindow.onClickDown()');
+					return true;
+				end
+
+				function onClickRelease(button, x, y)
+					Debug.chat('subnwindow.onClickRelease()');
+					return false;
+				end
+			</script> -->
+			<anchored>
+				<top anchor="bottom" relation="relative" offset="2" />
+				<left offset="-6"/>
+				<right offset="6" />
+			</anchored>
+			<class>strainlevel</class>
+			<activate />
+		</subwindow>
+	</template>
+	<template name="label_strain_cur">
+		<label>
+			<anchored height="20" width="30">
+				<bottom anchor="top" offset="-10" />
+				<left anchor="left" />
+			</anchored>
+			<static textres="strain_tracker_label_cur" />
+		</label>
+	</template>
+	<template name="number_strain_cur">
+		<basicnumber>
+			<anchored height="20" width="30">
+				<top />
+				<left anchor="right" offset="10" />
+			</anchored>
+			<readonly />
+			<min>0</min>
+		</basicnumber>
+	</template>
+	<template name="label_strain_max">
+		<label>
+			<anchored height="20" width="30">
+				<bottom anchor="top" offset="-10" />
+				<left anchor="center" />
+			</anchored>
+			<static textres="strain_tracker_label_max" />
+		</label>
+	</template>
+	<template name="number_strain_max">
+		<basicnumber>
+			<script>
+				function onInit()
+					if getValue() == 0 then
+						setValue(1);
+					end
+				end
+			</script>
+			<anchored height="20" width="30">
+				<top />
+				<left anchor="right" offset="10" />
+			</anchored>
+			<min>1</min>
+			<max>8</max>
+		</basicnumber>
+	</template>
+
+	<template name="label_strainlevel">
+		<stringcontrol name="description">
+			<anchored>
+				<top anchor="center" />
+				<left offset="12"/>
+				<right offset="-12" />
+			</anchored>
+			<script file="strain/scripts/strain_description.lua" />
+			<multilinespacing>14</multilinespacing>
+			<font>sheetlabelmini</font>
+			<center />
+			<readonly />
+		</stringcontrol>
+	</template>
+	<template name="icon_automated">
+		<genericcontrol name="automated">
+			<anchored height="20" width="20">
+				<bottom anchor="bottom" offset="-7" />
+				<right anchor="right" offset="-7" />
+			</anchored>
+			<icon>button_effect</icon>
+			<tooltip textres="strain_tracker_automated_tooltip"/>
+			<invisible />
+		</genericcontrol>
+	</template>
+	<template name="windowclicker">
+		<genericcontrol>
+			<script>
+				function onInit()
+					setHoverCursor("hand");
+				end
+				function onClickDown(button, x, y)
+					return true;
+				end
+
+				function onClickRelease(button, x, y)
+					window.onClick();
+					return true;
+				end
+			</script>
+			<anchored>
+				<top />
+				<bottom />
+				<left />
+				<right />
+			</anchored>
+		</genericcontrol>
+	</template>
+	<template name="overlay">
+		<genericcontrol>
+			<anchored>
+				<top offset="5"/>
+				<bottom offset="-5"/>
+				<left offset="5"/>
+				<right offset="-5" />
+			</anchored>
+			<invisible/>
+		</genericcontrol>	
+	</template>
+</root>

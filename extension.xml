@@ -11,5 +11,15 @@
 		</ruleset>
 	</properties>
 	<base>
+		<script name="StrainManager" file="scripts/manager_strain.lua" />
+		
+		<includefile source="campaign/record_char_main.xml" />
+
+		<includefile source="graphics/graphics_frames.xml" />
+
+		<includefile source="strain/strain_tracker.xml" />
+		<includefile source="strain/template_strain.xml" />
+
+		<includefile source="strings/strings_talent.xml" />
 	</base>
 </root>

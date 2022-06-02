@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	Please see the license.html file included with this distribution for 
+	attribution and copyright information.
+-->
+<root>
+	<string name="strain_tracker_button">Strain Tracker</string>
+	<string name="strain_tracker_window_title">Strain</string>
+	<string name="strain_tracker_label_body">Body</string>
+	<string name="strain_tracker_label_mind">Mind</string>
+	<string name="strain_tracker_label_soul">Soul</string>
+	<string name="strain_tracker_label_cur">Cur</string>
+	<string name="strain_tracker_label_max">Max</string>
+
+	<!-- Tooltips -->
+	<string name="strain_tracker_automated_tooltip">Automatically</string>
+
+	<!-- Strain levels -->
+	<string name="strainlevel_body_1">Your nose starts to bleed</string>
+	<string name="strainlevel_body_1">Your nose starts to bleed</string>
+	<string name="strainlevel_body_2">Disadvantage on Strength and Dexterity checks</string>
+	<string name="strainlevel_body_3">Speed halved</string>
+	<string name="strainlevel_body_4">Disadvantage on Strength saving throws</string>
+	<string name="strainlevel_body_5">Blood vessels burst in your eyes, and you can't stop sweating</string>
+	<string name="strainlevel_body_6">Disadvantage on Dexterity saving throws</string>
+	<string name="strainlevel_body_7">Attacks against you have advantage</string>
+	<string name="strainlevel_body_8">Hit point maximum halved</string>
+
+	<string name="strainlevel_mind_1">You temporarily forget the proper name of a person, place, or institution (chosen by the GM)</string>
+	<string name="strainlevel_mind_2">Disadvantage on Intelligence checks and ability checks made with tools</string>
+	<string name="strainlevel_mind_3">Lose proficiency in all tools and weapons you are proficient in, and can only speak, read, and understand one language</string>
+	<string name="strainlevel_mind_4">Disadvantage on Intelligence saving throws</string>
+	<string name="strainlevel_mind_5">You constantly misuse a common word or phrase (chosen by the GM)</string>
+	<string name="strainlevel_mind_6">Lose proficiency in all skills in which you are proficient</string>
+	<string name="strainlevel_mind_7">Lose proficiency in all saving throws in which you are proficient</string>
+	<string name="strainlevel_mind_8">Lose immunity to, and automatically fail saves against, the charmed, frightened, paralyzed, and stunned conditions</string>
+
+	<string name="strainlevel_soul_1">You gain the following flaw: "Every inconvenience annoys me more than it should."</string>
+	<string name="strainlevel_soul_2">Disadvantage on Wisdom and Charisma checks</string>
+	<string name="strainlevel_soul_3">Vulnerable to necrotic damage</string>
+	<string name="strainlevel_soul_4">Disadvantage on Charisma saving throws</string>
+	<string name="strainlevel_soul_5">You gain the following flaw: "Courtesy and manners are a waste of time."</string>
+	<string name="strainlevel_soul_6">Disadvantage on Wisdom saving throws</string>
+	<string name="strainlevel_soul_7">Disadvantage on death saving throws</string>
+	<string name="strainlevel_soul_8">When a supernatural effect causes you to regain hit points, you only regain half the amount you normally would</string>
+</root>

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	Please see the license.html file included with this distribution for 
+	attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="straintracker">
+		<frame>charsheet</frame>
+		<placement>
+			<size width="695" height="1000" />
+		</placement>
+		<sizelimits>
+			<minimum width="695" height="1000" />
+			<dynamic />
+		</sizelimits>
+		<softclose />
+		<nodelete />
+		<script file="strain/scripts/strain_tracker.lua" />
+		<sheetdata>
+			<windowtitlebar name="reftitle">
+				<resource>strain_tracker_window_title</resource>
+			</windowtitlebar>
+
+			<!-- BODY -->
+			<label_charframetop name="body_title">
+				<anchored height="20" width="200">
+					<top anchor="top" offset="100" />
+					<left anchor="left" offset="25" />
+				</anchored>
+				<static textres="strain_tracker_label_body" />
+			</label_charframetop>
+
+			<label_strain_cur name="label_cur_body">
+				<anchored to="body_title" />
+			</label_strain_cur>
+
+			<number_strain_cur name="cur_body" source="strain.body.current">
+				<anchored to="label_cur_body" />
+			</number_strain_cur>
+
+			<label_strain_max name="label_max_body">
+				<anchored to="body_title" />
+			</label_strain_max>
+
+			<number_strain_max name="max_body" source="strain.body.max">
+				<anchored to="label_max_body" />
+			</number_strain_max>
+
+			<strainlevel name="body_1">
+				<anchored to="body_title" />
+				<parameters>
+					<stat>body</stat>
+					<level>1</level>
+				</parameters>
+			</strainlevel>
+			<strainlevel name="body_2">
+				<anchored to="body_title" />
+				<parameters>
+					<stat>body</stat>
+					<level>2</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="body_3">
+				<anchored to="body_title" />
+				<parameters>
+					<stat>body</stat>
+					<level>3</level>
+				</parameters>
+			</strainlevel>
+			<strainlevel name="body_4">
+				<anchored to="body_title" />
+				<parameters>
+					<stat>body</stat>
+					<level>4</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="body_5">
+				<anchored to="body_title" />
+				<parameters>
+					<stat>body</stat>
+					<level>5</level>
+				</parameters>
+			</strainlevel>
+			<strainlevel name="body_6">
+				<anchored to="body_title" />
+				<parameters>
+					<stat>body</stat>
+					<level>6</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="body_7">
+				<anchored to="body_title" />
+				<parameters>
+					<stat>body</stat>
+					<level>7</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="body_8">
+				<anchored to="body_title" />
+				<parameters>
+					<stat>body</stat>
+					<level>8</level>
+				</parameters>
+			</strainlevel>
+
+			<!-- MIND -->
+			<label_charframetop name="mind_title">
+				<anchored to="body_title" position="right" offset="20,0" width="200">
+				</anchored>
+				<static textres="strain_tracker_label_mind" />
+			</label_charframetop>
+
+			<label_strain_cur name="label_cur_mind">
+				<anchored to="mind_title" />
+			</label_strain_cur>
+			<number_strain_cur name="cur_mind" source="strain.mind.current">
+				<anchored to="label_cur_mind" />
+			</number_strain_cur>
+
+			<label_strain_max name="label_max_mind">
+				<anchored to="mind_title" />
+			</label_strain_max>
+			<number_strain_max name="max_mind" source="strain.mind.max">
+				<anchored to="label_max_mind" />
+			</number_strain_max>
+
+			<strainlevel name="mind_1">
+				<anchored to="mind_title" />
+				<parameters>
+					<stat>mind</stat>
+					<level>1</level>
+				</parameters>
+			</strainlevel>
+			<strainlevel name="mind_2">
+				<anchored to="mind_title" />
+				<parameters>
+					<stat>mind</stat>
+					<level>2</level>
+				</parameters>
+			</strainlevel>
+			<strainlevel name="mind_3">
+				<anchored to="mind_title" />
+				<parameters>
+					<stat>mind</stat>
+					<level>3</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="mind_4">
+				<anchored to="mind_title" />
+				<parameters>
+					<stat>mind</stat>
+					<level>4</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="mind_5">
+				<anchored to="mind_title" />
+				<parameters>
+					<stat>mind</stat>
+					<level>5</level>
+				</parameters>
+			</strainlevel>
+			<strainlevel name="mind_6">
+				<anchored to="mind_title" />
+				<parameters>
+					<stat>mind</stat>
+					<level>6</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="mind_7">
+				<anchored to="mind_title" />
+				<parameters>
+					<stat>mind</stat>
+					<level>7</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="mind_8">
+				<anchored to="mind_title" />
+				<parameters>
+					<stat>mind</stat>
+					<level>8</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+
+			<!-- SOUL -->				
+			<label_charframetop name="soul_title">
+				<anchored to="mind_title" position="right" offset="20,0" width="200">
+				</anchored>
+				<static textres="strain_tracker_label_soul" />
+			</label_charframetop>
+
+			<label_strain_cur name="label_cur_soul">
+				<anchored to="soul_title" />
+			</label_strain_cur>
+			<number_strain_cur name="cur_soul" source="strain.soul.current">
+				<anchored to="label_cur_soul" />
+			</number_strain_cur>
+
+			<label_strain_max name="label_max_soul">
+				<anchored to="soul_title" />
+			</label_strain_max>
+			<number_strain_max name="max_soul" source="strain.soul.max">
+				<anchored to="label_max_soul" />
+			</number_strain_max>
+
+			<strainlevel name="soul_1">
+				<anchored to="soul_title" />
+				<parameters>
+					<stat>soul</stat>
+					<level>1</level>
+				</parameters>
+			</strainlevel>
+			<strainlevel name="soul_2">
+				<anchored to="soul_title" />
+				<parameters>
+					<stat>soul</stat>
+					<level>2</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="soul_3">
+				<anchored to="soul_title" />
+				<parameters>
+					<stat>soul</stat>
+					<level>3</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="soul_4">
+				<anchored to="soul_title" />
+				<parameters>
+					<stat>soul</stat>
+					<level>4</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="soul_5">
+				<anchored to="soul_title" />
+				<parameters>
+					<stat>soul</stat>
+					<level>5</level>
+				</parameters>
+			</strainlevel>
+			<strainlevel name="soul_6">
+				<anchored to="soul_title" />
+				<parameters>
+					<stat>soul</stat>
+					<level>6</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="soul_7">
+				<anchored to="soul_title" />
+				<parameters>
+					<stat>soul</stat>
+					<level>7</level>
+					<automated />
+				</parameters>
+			</strainlevel>
+			<strainlevel name="soul_8">
+				<anchored to="soul_title" />
+				<parameters>
+					<stat>soul</stat>
+					<level>8</level>
+				</parameters>
+			</strainlevel>
+
+			<close_charsheet />
+			<resize_charsheet />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="strainlevel">
+		<frame name="fielddark" offset="7,5,7,5" />
+		<sizelimits>
+			<maximum height="90" />
+			<minimum height="90" />
+		</sizelimits>
+		<script file="strain/scripts/strain_level.lua" />
+		<sheetdata>
+			<overlay name="red">
+				<frame>red</frame>
+			</overlay>
+			<overlay name="green">
+				<frame>green</frame>
+			</overlay>
+			<label_strainlevel name="description" />
+			<icon_automated name="automated" />
+			<windowclicker />
+		</sheetdata>
+	</windowclass>
+</root>
