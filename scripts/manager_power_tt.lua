@@ -49,7 +49,7 @@ function getPCPowerManifestActionText(nodeAction)
 	local sPowerDie = "";
 	local rAction, rActor = PowerManager.getPCPowerAction(nodeAction);
 	if rAction then
-		sPowerDie = rAction.sPowerDie;
+		sPowerDie = rAction.sPowerDie or "";
 		if rAction.bPrompt then
 			sPowerDie = sPowerDie .. "*";
 		end
