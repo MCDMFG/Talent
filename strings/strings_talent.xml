@@ -8,14 +8,32 @@
 	<string name="strain_tracker_button">Strain Tracker</string>
 	<string name="strain_tracker_window_title">Strain</string>
 	<string name="strain_tracker_button_clear">Clear</string>
+	<string name="strain_tracker_button_clearall">Clear All Strain</string>
 	<string name="strain_tracker_label_body">Body</string>
 	<string name="strain_tracker_label_mind">Mind</string>
 	<string name="strain_tracker_label_soul">Soul</string>
 	<string name="strain_tracker_label_cur">Cur</string>
 	<string name="strain_tracker_label_max">Max</string>
+	<string name="strain_tracker_label_toapply">Remaining to Apply</string>
 
 	<!-- Tooltips -->
 	<string name="strain_tracker_automated_tooltip">Automatically</string>
+	<string name="power_tooltip_grouptypepsionic">Powers</string>
+
+	<!-- Power Actions and Editors --> 
+	<string name="power_label_grouppowerdie">Power Die</string>
+	<string name="d4">d4</string>
+	<string name="d6">d6</string>
+	<string name="d8">d8</string>
+	<string name="d10">d10</string>
+	<string name="d12">d12</string>
+	<string name="order_1">1st-Order</string>
+	<string name="order_2">2nd-Order</string>
+	<string name="order_3">3rd-Order</string>
+	<string name="order_4">4th-Order</string>
+	<string name="order_5">5th-Order</string>
+	<string name="order_6">6th-Order</string>
+	<string name="power_menu_addstrain">Add Power Die Roll</string>
 
 	<!-- Strain levels -->
 	<string name="strainlevel_body_1">Your nose starts to bleed</string>

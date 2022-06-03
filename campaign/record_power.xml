@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	Please see the license.html file included with this distribution for 
+	attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="power_group_header" merge="join">
+		<script file="campaign/scripts/power_group.lua" />
+	</windowclass>
+
+	<windowclass name="power_groupdetail" merge="join">
+		<script file="campaign/scripts/power_groupdetail.lua" />
+		<sheetdata>
+			<label_column name="grouppowerdie_label">
+				<static textres="power_label_grouppowerdie" />
+			</label_column>
+			<button_stringcycler name="powerdie">
+				<anchored width="40" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+					<left offset="97" />
+				</anchored>
+				<parameters>
+					<defaultlabelres mergerule="replace">dash</defaultlabelres>
+					<labelsres>d4|d6|d8</labelsres>
+					<values>d4|d6|d8</values>
+				</parameters>
+			</button_stringcycler>		
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="power_item" merge="join">
+		<script file="campaign/scripts/power_item.lua" />
+	</windowclass>
+
+	<windowclass name="power_action_mini" merge="join">
+		<script file="campaign/scripts/power_action_mini.lua" />
+	</windowclass>
+
+	<windowclass name="power_action" merge="join">
+		<script file="campaign/scripts/power_action.lua" />
+		<sheetdata>
+			<!-- Psionic Power Die -->
+			<button_poweraction name="manifestbutton">
+				<anchored position="insidetopleft" offset="2,2" />
+				<icon normal="button_action_manifest" pressed="button_action_manifest_down" />
+			</button_poweraction>
+			<label name="powerdielabel">
+				<anchored to="manifestbutton" position="righthigh" offset="5,0" width="80" />
+				<static textres="power_label_grouppowerdie" />
+			</label>
+			<string_poweractionview name="powerdieview">
+				<anchored to="powerdielabel" position="righthigh" offset="10,0" width="70" />
+			</string_poweractionview>
+		</sheetdata>
+	</windowclass>
+
+	<template name="button_grouptype">
+		<button_iconcycler name="castertype">
+			<anchored width="20" height="20" />
+			<parameters>
+				<defaulticon>power_weapon</defaulticon>
+				<defaulttooltipres>power_tooltip_grouptypeability</defaulttooltipres>
+				<icons>power_casterprep|power_casterspontaneous</icons>
+				<tooltipsres>power_tooltip_grouptypeprep|power_tooltip_grouptypepsionic</tooltipsres>
+				<values>memorization|psionic</values>
+			</parameters>
+			<script>
+				function onValueChanged()
+					if window.onCasterTypeChanged then
+						window.onCasterTypeChanged();
+					end
+				end
+			</script>
+		</button_iconcycler>
+	</template>
+</root>

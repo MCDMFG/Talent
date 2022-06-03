@@ -12,17 +12,22 @@
 	</properties>
 	<base>
 		<script name="StrainManager" file="scripts/manager_strain.lua" />
+		<script name="PowerManagerTT" file="scripts/manager_power_tt.lua" />
 		<script name="ActionAttackTT" file="scripts/manager_action_attack_tt.lua" />
 		<script name="ActionSaveTT" file="scripts/manager_action_save_tt.lua" />
 		<script name="ActionSkillTT" file="scripts/manager_action_skill_tt.lua" />
 		<script name="ActionInitTT" file="scripts/manager_action_init_tt.lua" />
 		<script name="ActionDamageTT" file="scripts/manager_action_damage_tt.lua" />
+		<script name="ActionManifest" file="scripts/manager_action_manifest.lua" />
 		<script name="CharWeaponManagerTT" file="scripts/manager_char_weapon_tt.lua" />
+		<script name="CharManagerTT" file="scripts/manager_char.lua" />
 		
 		<includefile source="campaign/record_char_main.xml" />
 		<includefile source="campaign/record_char_weapon.xml" />
+		<includefile source="campaign/record_power.xml" />
 
 		<includefile source="graphics/graphics_frames.xml" />
+		<includefile source="graphics/graphics_buttons.xml" />
 
 		<includefile source="strain/strain_tracker.xml" />
 		<includefile source="strain/template_strain.xml" />

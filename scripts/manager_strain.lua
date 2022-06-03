@@ -1,6 +1,16 @@
 function onInit()
 end
 
+function clearAllStrain(rActor)
+	if type(rActor) == "databasenode" or type(rActor) == "string" then
+        rActor = ActorManager.resolveActor(rActor);
+    end
+	setCurrentStrain(rActor, "body", 0);
+	setCurrentStrain(rActor, "mind", 0);
+	setCurrentStrain(rActor, "soul", 0);
+	setStrainToApply(rActor, 0);
+end
+
 function getCurrentStrain(rActor, sType)
 	if type(rActor) == "databasenode" or type(rActor) == "string" then
         rActor = ActorManager.resolveActor(rActor);
@@ -117,7 +127,6 @@ function setStrainToApply(rActor, nStrain)
 	if type(rActor) == "databasenode" or type(rActor) == "string" then
         rActor = ActorManager.resolveActor(rActor);
     end
-
 	if not nStrain then
 		return;
 	end
@@ -128,4 +137,21 @@ function setStrainToApply(rActor, nStrain)
     end
 
 	DB.setValue(nodeActor, "strain.toapply", "number", nStrain);
+end
+
+function addStrainToApply(rActor, nStrain)
+	if type(rActor) == "databasenode" or type(rActor) == "string" then
+        rActor = ActorManager.resolveActor(rActor);
+    end
+	if not nStrain then
+		return;
+	end
+
+	local sNodeType, nodeActor = ActorManager.getTypeAndNode(rActor);
+    if not nodeActor then
+        return;
+    end
+
+	local nCur = getStrainToApply(rActor);
+	DB.setValue(nodeActor, "strain.toapply", "number", nCur + nStrain);
 end
