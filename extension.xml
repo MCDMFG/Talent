@@ -3,7 +3,7 @@
 	<announcement text="Loaded Talent" font="emotefont" />
 	<properties>
 		<name>The Talent</name>
-		<version>1.0-alpha</version>
+		<version>1.2-alpha</version>
 		<author>Shane Parker and George Taray</author>
 		<description>Support for MCDM's Talent class</description>
 		<ruleset>
