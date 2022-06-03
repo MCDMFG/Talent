@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	Please see the license.html file included with this distribution for 
+	attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="power_manifest_editor">
+		<frame>charsheethelper</frame>
+		<placement>
+			<size width="370" height="350" />
+		</placement>
+		<sizelimits>
+			<minimum width="370" height="350" />
+			<dynamic />
+		</sizelimits>
+		<nodelete />
+		<playercontrol />
+		<minimize>minimized_char</minimize>
+		<tooltip control="name" />
+		<sheetdata>
+			<windowtitlebar_char name="title">
+				<resource>power_title_manifest</resource>
+			</windowtitlebar_char>
+			<anchor_title_charsheethelper name="contentanchor" />
+			
+			<genericcontrol name="contentframe">
+				<anchored to="contentanchor">
+					<top anchor="bottom" offset="0" />
+					<left />
+					<right />
+					<bottom parent="" offset="-30" />
+				</anchored>
+			</genericcontrol>
+
+			<subwindow_record name="main">
+				<class>power_manifest_editor_main</class>
+				<activate />
+				<fastinit />
+			</subwindow_record>
+
+			<scrollbar_record>
+				<target>main</target>
+			</scrollbar_record>
+
+			<resize_charsheethelper />
+			<close_charsheethelper />
+		</sheetdata>
+	</windowclass>
+	<windowclass name="power_manifest_editor_main">
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<label_column name="name_label">
+				<static textres="power_label_name" />
+			</label_column>
+			<stringcontrol name="name">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+					<left offset="97" />
+					<right offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<font>sheettext</font>
+				<readonly />
+			</stringcontrol>
+			
+			<header_column name="header_manifest">
+				<static textres="power_header_manifest" />
+				<center />
+			</header_column>
+			<label_column name="prompt_label">
+				<static textres="power_label_prompt" />
+			</label_column>
+			<button_stringcycler name="prompt">
+				<anchored width="60" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+					<left offset="167" />
+				</anchored>
+				<parameters>
+					<defaultlabelres>option_val_no</defaultlabelres>
+					<labelsres>option_val_yes</labelsres>
+					<values>yes</values>
+				</parameters>
+			</button_stringcycler>
+		</sheetdata>
+	</windowclass>
+</root>

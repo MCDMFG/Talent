@@ -9,6 +9,8 @@
 		<ruleset>
 			<name>5E</name>
 		</ruleset>
+		<!-- 125 to load after BCE -->
+		<loadorder>125</loadorder>
 	</properties>
 	<base>
 		<script name="StrainManager" file="scripts/manager_strain.lua" />
@@ -21,10 +23,12 @@
 		<script name="ActionManifest" file="scripts/manager_action_manifest.lua" />
 		<script name="CharWeaponManagerTT" file="scripts/manager_char_weapon_tt.lua" />
 		<script name="CharManagerTT" file="scripts/manager_char.lua" />
+		<script name="OptionsTT" file="scripts/talent_options.lua" />
 		
 		<includefile source="campaign/record_char_main.xml" />
 		<includefile source="campaign/record_char_weapon.xml" />
 		<includefile source="campaign/record_power.xml" />
+		<includefile source="campaign/record_power_roll.xml" />
 
 		<includefile source="graphics/graphics_frames.xml" />
 		<includefile source="graphics/graphics_buttons.xml" />

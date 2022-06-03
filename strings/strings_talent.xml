@@ -5,6 +5,12 @@
 	attribution and copyright information.
 -->
 <root>
+	<!-- Options -->
+	<string name="option_val_no">No</string>
+	<string name="option_val_yes">Yes</string>
+	<string name="option_label_POPUPSTRAIN">Combat: Automatically open strain tracker when strain is taken</string>
+
+	<!-- Strain Tracker -->
 	<string name="strain_tracker_button">Strain Tracker</string>
 	<string name="strain_tracker_window_title">Strain</string>
 	<string name="strain_tracker_button_clear">Clear</string>
@@ -21,7 +27,7 @@
 	<string name="power_tooltip_grouptypepsionic">Powers</string>
 
 	<!-- Power Actions and Editors --> 
-	<string name="power_label_grouppowerdie">Power Die</string>
+	<string name="power_label_grouppowerdie">Manifest</string>
 	<string name="d4">d4</string>
 	<string name="d6">d6</string>
 	<string name="d8">d8</string>
@@ -33,7 +39,14 @@
 	<string name="order_4">4th-Order</string>
 	<string name="order_5">5th-Order</string>
 	<string name="order_6">6th-Order</string>
-	<string name="power_menu_addstrain">Add Power Die Roll</string>
+	<string name="power_menu_addstrain">Add Manifest Roll</string>
+	<string name="power_title_manifest">Manifest Power</string>
+	<string name="power_header_manifest">Power</string>
+	<string name="power_label_prompt">Prompt for Variable Cost?</string>
+	<string name="power_label_order">Order</string>
+
+	<string name="prompt_label_ok">Accept</string>
+	<string name="promp_tooltip_ok">Manifest as a %s power</string>
 
 	<!-- Strain levels -->
 	<string name="strainlevel_body_1">Your nose starts to bleed</string>

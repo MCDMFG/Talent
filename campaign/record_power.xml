@@ -47,12 +47,108 @@
 				<icon normal="button_action_manifest" pressed="button_action_manifest_down" />
 			</button_poweraction>
 			<label name="powerdielabel">
-				<anchored to="manifestbutton" position="righthigh" offset="5,0" width="80" />
+				<anchored to="manifestbutton" position="righthigh" offset="5,0" width="60" />
 				<static textres="power_label_grouppowerdie" />
 			</label>
 			<string_poweractionview name="powerdieview">
 				<anchored to="powerdielabel" position="righthigh" offset="10,0" width="70" />
 			</string_poweractionview>
+			<button_poweractioneditor name="manifestdetail">
+				<editor>power_manifest_editor</editor>
+			</button_poweractioneditor>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="power_manifest_prompt">
+		<script file="campaign/scripts/power_manifest_prompt.lua" />
+		<frame>charsheethelper</frame>
+		<placement>
+			<size width="300" height="250" />
+		</placement>
+		<sizelimits>
+			<size width="300" height="250" />
+		</sizelimits>
+		<nodelete />
+		<playercontrol />
+		<tooltip control="name" />
+		<sheetdata>
+			<windowtitlebar_char name="title">
+				<resource>power_title_manifest</resource>
+			</windowtitlebar_char>
+			
+			<anchor_title_charsheethelper name="contentanchor" />
+			
+			<genericcontrol name="contentframe">
+				<anchored to="contentanchor">
+					<top anchor="bottom" offset="0" />
+					<left />
+					<right />
+					<bottom parent="" offset="-30" />
+				</anchored>
+			</genericcontrol>
+
+			<subwindow_record name="main">
+				<class>power_manifest_prompt_main</class>
+				<activate />
+				<fastinit />
+			</subwindow_record>
+
+			<button_text name="button_ok">
+				<script>
+					function onButtonPress()
+						window.ok();
+					end
+				</script>
+				<anchored width="80" height="22">
+					<bottom offset="-30" />
+					<right offset="-30" />
+				</anchored>
+				<state textres="prompt_label_ok"/>
+				<tooltip textres="prompt_tooltip_ok" />
+			</button_text>
+
+			<close_charsheethelper />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="power_manifest_prompt_main">
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<label_column name="name_label">
+				<static textres="power_label_name" />
+			</label_column>
+			<stringcontrol name="name">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+					<left offset="97" />
+					<right offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<font>sheettext</font>
+				<readonly />
+			</stringcontrol>
+			
+			<header_column name="header_manifest">
+				<static textres="power_header_manifest" />
+				<center />
+			</header_column>
+
+			<label_column name="order_label">
+				<static textres="power_label_order" />
+			</label_column>
+			<basicnumber name="order">
+				<script>
+					function onValueChanged()
+						window.parentcontrol.window.updateTooltip(getValue());
+					end
+				</script>
+				<anchored width="40" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+					<left offset="97" />
+				</anchored>
+				<max>6</max>
+			</basicnumber>
 		</sheetdata>
 	</windowclass>
 

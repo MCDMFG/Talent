@@ -1,8 +1,10 @@
 OOB_MSGTYPE_APPLYSTRAIN = "applystrain";
+OOB_MSGTYPE_OPENSTRAINTRACKER = "openstraintracker";
 
 function onInit()
 	OOBManager.registerOOBMsgHandler(OOB_MSGTYPE_APPLYSTRAIN, handleApplyStrain);
-	-- ActionsManager.registerModHandler("manifest", modManifest);
+	OOBManager.registerOOBMsgHandler(OOB_MSGTYPE_OPENSTRAINTRACKER, handleOpenStrainTracker);
+	ActionsManager.registerModHandler("manifest", modManifest);
 	ActionsManager.registerResultHandler("manifest", onManifest)
 end
 
@@ -17,6 +19,10 @@ function getRoll(draginfo, rActor, rAction)
 	rRoll.sDesc = "[MANIFEST] " .. rAction.label;
 
 	if rAction.nLevel then
+		local sOrder = Interface.getString("order_" .. rAction.nLevel);
+		if (sOrder or "") ~= "" then
+			rRoll.sDesc = rRoll.sDesc .. " (" .. Interface.getString("order_" .. rAction.nLevel) .. ")";
+		end
 		rRoll.sDesc = rRoll.sDesc .. " [ORDER: " .. rAction.nLevel .. "]";
 	end
 
@@ -45,6 +51,10 @@ function onManifest(rSource, rTarget, rRoll)
 	end
 end
 
+--------------------------------------
+-- ADD STRAIN
+--------------------------------------
+
 function notifyApplyStrain(rSource, rTarget, nStrain, sResult)
 	if not rSource then
 		return;
@@ -67,6 +77,7 @@ end
 
 function applyStrain(rSource, nStrain, sResult)
 	StrainManager.addStrainToApply(rSource, nStrain);
+	notifyOpenStrainTracker(rSource);
 	messageApplyStrain(rSource, nStrain, sResult);
 end
 
@@ -81,4 +92,33 @@ function messageApplyStrain(rSource, nStrain, sResult)
 	msgLong.icon = "roll_damage";
 		
 	ActionsManager.outputResult(false, rSource, nil, msgLong, msgShort);
+end
+
+--------------------------------------
+-- OPEN STRAIN TRACKER
+--------------------------------------
+
+function notifyOpenStrainTracker(rSource)
+	local sUser = getUser(rSource);
+	
+	local msgOOB = {};
+	msgOOB.type = OOB_MSGTYPE_OPENSTRAINTRACKER;
+	msgOOB.sSourceNode = rSource.sCreatureNode;
+
+	Comm.deliverOOBMessage(msgOOB, sUser);
+end
+
+function handleOpenStrainTracker(msgOOB)
+	if OptionsManager.isOption("POPUPSTRAIN", "on") then
+		Interface.openWindow("straintracker", msgOOB.sSourceNode);
+	end
+end
+
+function getUser(rSource)
+	for _,sIdentity in pairs(User.getAllActiveIdentities()) do
+		local sName = User.getIdentityLabel(sIdentity);
+		if sName == rSource.sName then
+			return User.getIdentityOwner(sIdentity)
+		end
+	end
 end

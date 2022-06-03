@@ -37,6 +37,7 @@ function getPCPowerAction(nodeAction, sSubRoll)
 			rAction.sPowerDie = DB.getValue(nodePowerGroup, "powerdie", "");
 		end
 		rAction.nLevel = DB.getValue(nodePower, "level", 0);
+		rAction.bPrompt = DB.getValue(nodeAction, "prompt", "") == "yes";
 	else
 		rAction, rActor = fGetPCPowerActionOriginal(nodeAction, sSubRoll)
 	end
@@ -49,6 +50,9 @@ function getPCPowerManifestActionText(nodeAction)
 	local rAction, rActor = PowerManager.getPCPowerAction(nodeAction);
 	if rAction then
 		sPowerDie = rAction.sPowerDie;
+		if rAction.bPrompt then
+			sPowerDie = sPowerDie .. "*";
+		end
 	end
 	return sPowerDie or "";
 end
@@ -61,6 +65,12 @@ function performAction(draginfo, rActor, rAction, nodePower)
 	local rRolls = {};
 	if rAction.type == "manifest" then
 		PowerManager.evalAction(rActor, nodePower, rAction);
+
+		if rAction.bPrompt then
+			local window = Interface.openWindow("power_manifest_prompt", "");
+			window.setData(rActor, rAction, nodePower);
+			return;
+		end
 		
 		table.insert(rRolls, ActionManifest.getRoll(nil, rActor, rAction))
 	else
