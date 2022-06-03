@@ -10,10 +10,10 @@
 		<frame>charsheet</frame>
 		<minimize>minimized_charability</minimize>
 		<placement>
-			<size width="695" height="880" />
+			<size width="635" height="860" />
 		</placement>
 		<sizelimits>
-			<minimum width="695" height="880" />
+			<minimum width="635" height="860" />
 			<dynamic />
 		</sizelimits>
 		<softclose />
@@ -53,7 +53,7 @@
 
 			<!-- BODY -->
 			<label_charframetop name="body_title">
-				<anchored height="20" width="200">
+				<anchored height="20" width="180">
 					<top anchor="top" offset="100" />
 					<left anchor="left" offset="25" />
 				</anchored>
@@ -135,7 +135,7 @@
 
 			<!-- MIND -->
 			<label_charframetop name="mind_title">
-				<anchored to="body_title" position="right" offset="20,0" width="200">
+				<anchored to="body_title" position="right" offset="20,0" width="180">
 				</anchored>
 				<static textres="strain_tracker_label_mind" />
 			</label_charframetop>
@@ -216,7 +216,7 @@
 
 			<!-- SOUL -->				
 			<label_charframetop name="soul_title">
-				<anchored to="mind_title" position="right" offset="20,0" width="200">
+				<anchored to="mind_title" position="right" offset="20,0" width="180">
 				</anchored>
 				<static textres="strain_tracker_label_soul" />
 			</label_charframetop>

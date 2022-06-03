@@ -9,9 +9,9 @@
 	<template name="strainlevel">
 		<subwindow>
 			<anchored>
-				<top anchor="bottom" relation="relative" offset="2" />
-				<left offset="-6"/>
-				<right offset="6" />
+				<top anchor="bottom" relation="relative" offset="0" />
+				<left offset="-10"/>
+				<right offset="10" />
 			</anchored>
 			<class>strainlevel</class>
 			<activate />

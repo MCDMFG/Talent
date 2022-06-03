@@ -1,7 +1,7 @@
 function onInit()
 	super.onInit();
 	if not windowlist.isReadOnly() then
-		registerMenuItem(Interface.getString("power_menu_addpowerdie"), "broadcast", 3, 8);
+		registerMenuItem(Interface.getString("power_menu_addstrain"), "broadcast", 3, 8);
 	end
 end
 

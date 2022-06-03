@@ -13,15 +13,19 @@ function onInit()
 		automated.setVisible(true);
 	end
 	
-	DB.addHandler(DB.getPath(charnode, "strain." .. sType .. ".max"), "onUpdate", updateFrame);
-	DB.addHandler(DB.getPath(charnode, "strain." .. sType .. ".current"), "onUpdate", updateFrame);
+	DB.addHandler(DB.getPath(charnode, "strain." .. sType .. ".max"), "onUpdate", update);
+	DB.addHandler(DB.getPath(charnode, "strain." .. sType .. ".current"), "onUpdate", update);
 
-	updateFrame(StrainManager.getMaxStrain(charnode, sType));
+	update();
 end
 
 function onClose()
-	DB.removeHandler(DB.getPath(charnode, "strain." .. sType .. ".max"), "onUpdate", updateFrame);
-	DB.removeHandler(DB.getPath(charnode, "strain." .. sType .. ".current"), "onUpdate", updateFrame);
+	DB.removeHandler(DB.getPath(charnode, "strain." .. sType .. ".max"), "onUpdate", update);
+	DB.removeHandler(DB.getPath(charnode, "strain." .. sType .. ".current"), "onUpdate", update);
+end
+
+function update()
+	updateFrame();
 end
 
 function updateFrame()
