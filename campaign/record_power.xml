@@ -6,6 +6,10 @@
 -->
 
 <root>
+	<windowclass name="power_page" merge="join">
+		<script file="campaign/scripts/power_page.lua" />
+	</windowclass>
+
 	<windowclass name="power_group_header" merge="join">
 		<script file="campaign/scripts/power_group.lua" />
 	</windowclass>

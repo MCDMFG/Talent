@@ -21,7 +21,6 @@ end
 
 function ok()
 	local nLevel = main.subwindow.order.getValue();
-	Debug.chat('ok()', nLevel);
 	rAction.nLevel = nLevel;
 	rAction.bPrompt =  false;
 	PowerManager.performAction(nil, rActor, rAction, nodePower)

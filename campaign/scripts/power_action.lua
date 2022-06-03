@@ -24,6 +24,7 @@ function updateDisplay()
 	manifestbutton.setVisible(sType == "manifest");
 	powerdielabel.setVisible(sType == "manifest");
 	powerdieview.setVisible(sType == "manifest");
+	manifestdetail.setVisible(sType == "manifest");
 end
 
 function onDataChanged()
