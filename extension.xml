@@ -9,8 +9,6 @@
 		<ruleset>
 			<name>5E</name>
 		</ruleset>
-		<!-- 125 to load after BCE -->
-		<loadorder>125</loadorder>
 	</properties>
 	<base>
 		<script name="StrainManager" file="scripts/manager_strain.lua" />

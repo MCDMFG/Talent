@@ -1,14 +1,12 @@
 local fGetSaveOriginal;
-local fModSaveOriginal;
+local fPerformDeathRollOriginal;
 
 function onInit()
 	fGetSaveOriginal = ActorManager5E.getSave;
 	ActorManager5E.getSave = getSave;
 
-	fModSaveOriginal = ActionSave.modSave;
-	ActionSave.modSave = modDeathSave;
-	ActionsManager.registerModHandler("death", modDeathSave);
-	ActionsManager.registerModHandler("death_auto", modDeathSave);
+	fPerformDeathRollOriginal = ActionSave.performDeathRoll;
+	ActionSave.performDeathRoll = performDeathRoll;
 end
 
 function getSave(rActor, sSave)
@@ -59,38 +57,24 @@ function getSave(rActor, sSave)
 	return nMod, bADV, bDIS, sDesc;
 end
 
-function modDeathSave(rSource, rTarget, rRoll)
-	fModSaveOriginal(rSource, rTarget, rRoll);
-
-	local aAddDesc = {};
-	local bADV = false;
-	local bDIS = false;
-	local bStrain = false;
-	if rRoll.sDesc:match(" %[ADV%]") then
-		bADV = true;
-		rRoll.sDesc = rRoll.sDesc:gsub(" %[ADV%]", "");
+-- I hate that we have to overwrite the whole thing here, but there's no getRoll for death saves
+-- And BCE does some weird things with the modSave handler that breaks saving throws if enabled
+function performDeathRoll(draginfo, rActor, bAuto)
+	local rRoll = { };
+	if bAuto then
+		rRoll.sType = "death_auto";
+	else
+		rRoll.sType = "death";
 	end
-	if rRoll.sDesc:match(" %[DIS%]") then
-		bDIS = true;
-		rRoll.sDesc = rRoll.sDesc:gsub(" %[DIS%]", "");
-	end
+	rRoll.aDice = { "d20" };
+	rRoll.nMod = 0;
+	
+	rRoll.sDesc = "[DEATH]";
 
-	-- Only want to mod death saves here
-	if rSource and rRoll.sDesc:match("%[DEATH%]") then
-		if StrainManager.isAtOrAboveStrainLevel(rSource, "soul", 7) then
-			bDIS = true;
-			bStrain = true;
-		end
-
-		if bStrain then
-			table.insert(aAddDesc, "[STRAIN]")
-		end
+	if StrainManager.isAtOrAboveStrainLevel(rActor, "soul", 7) then
+		rRoll.sDesc = rRoll.sDesc .. " [STRAIN]";
+		rRoll.sDesc = rRoll.sDesc .. " [DIS]";
 	end
 
-	if #aAddDesc > 0 then
-		rRoll.sDesc = rRoll.sDesc .. " " .. table.concat(aAddDesc, " ");
-	end
-
-	ActionsManager2.encodeAdvantage(rRoll, bADV, bDIS);
-	return rRoll;
+	ActionsManager.performAction(draginfo, rActor, rRoll);
 end
