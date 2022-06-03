@@ -28,6 +28,8 @@ function getPCPowerAction(nodeAction, sSubRoll)
 		local nodePower = nodeAction.getChild("...");
 		local sGroup = DB.getValue(nodePower, "group", "");
 		local nodePowerGroup = nil;
+		rAction.sPowerDie = "";
+
 		for _,v in pairs(DB.getChildren(nodeActor, "powergroup")) do
 			if DB.getValue(v, "name", "") == sGroup then
 				nodePowerGroup = v;
@@ -36,6 +38,7 @@ function getPCPowerAction(nodeAction, sSubRoll)
 		if nodePowerGroup then
 			rAction.sPowerDie = DB.getValue(nodePowerGroup, "powerdie", "");
 		end
+		
 		rAction.nLevel = DB.getValue(nodePower, "level", 0);
 		rAction.bPrompt = DB.getValue(nodeAction, "prompt", "") == "yes";
 	else

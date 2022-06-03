@@ -40,6 +40,7 @@
 	<string name="order_5">5th-Order</string>
 	<string name="order_6">6th-Order</string>
 	<string name="power_menu_addstrain">Add Manifest Roll</string>
+	<string name="power_menu_extraactions">More Actions</string>
 	<string name="power_title_manifest">Manifest Power</string>
 	<string name="power_header_manifest">Power</string>
 	<string name="power_label_prompt">Prompt for Variable Cost?</string>
