@@ -17,6 +17,7 @@
 		<script name="PowerManagerTT" file="scripts/manager_power_tt.lua" />
 		<script name="ActionAttackTT" file="scripts/manager_action_attack_tt.lua" />
 		<script name="ActionSaveTT" file="scripts/manager_action_save_tt.lua" />
+		<script name="ActionCheckTT" file="scripts/manager_action_check_tt.lua" />
 		<script name="ActionSkillTT" file="scripts/manager_action_skill_tt.lua" />
 		<script name="ActionInitTT" file="scripts/manager_action_init_tt.lua" />
 		<script name="ActionDamageTT" file="scripts/manager_action_damage_tt.lua" />
