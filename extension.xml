@@ -9,6 +9,7 @@
 		<ruleset>
 			<name>5E</name>
 		</ruleset>
+		<loadorder>120</loadorder>
 	</properties>
 	<base>
 		<script name="StrainManager" file="scripts/manager_strain.lua" />
