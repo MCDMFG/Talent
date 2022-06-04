@@ -7,19 +7,13 @@ function onInit()
 end
 
 function modAttack(rSource, rTarget, rRoll)
-	fModAttackOriginal(rSource, rAttack, rRoll);
-
 	local aAddDesc = {};
 	local bStrain = false;
 	local bADV = false;
-	local bDIS = false;
+	
 	if rRoll.sDesc:match(" %[ADV%]") then
 		bADV = true;
 		rRoll.sDesc = rRoll.sDesc:gsub(" %[ADV%]", "");		
-	end
-	if rRoll.sDesc:match(" %[DIS%]") then
-		bDIS = true;
-		rRoll.sDesc = rRoll.sDesc:gsub(" %[DIS%]", "");
 	end
 	
 	-- Lose proficiency with weapons
@@ -30,7 +24,7 @@ function modAttack(rSource, rTarget, rRoll)
 	-- attacks against PC have advantage
 	if rTarget and ActorManager.isPC(rTarget) and StrainManager.isAtOrAboveStrainLevel(rTarget, "body", 7) then
 		bStrain = true;
-		bADV = true;
+		table.insert(aAddDesc, "[ADV]")
 	end
 
 	if bStrain then
@@ -41,5 +35,7 @@ function modAttack(rSource, rTarget, rRoll)
 		rRoll.sDesc = rRoll.sDesc .. " " .. table.concat(aAddDesc, " ");
 	end
 
-	ActionsManager2.encodeAdvantage(rRoll, bADV, bDIS);
+	-- This goes at the end because the original func has the encodeAdvantage call
+	-- and that causes problems if run more than once.
+	fModAttackOriginal(rSource, rAttack, rRoll);
 end
