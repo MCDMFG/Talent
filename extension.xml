@@ -21,6 +21,7 @@
 		<script name="ActionInitTT" file="scripts/manager_action_init_tt.lua" />
 		<script name="ActionDamageTT" file="scripts/manager_action_damage_tt.lua" />
 		<script name="ActionManifest" file="scripts/manager_action_manifest.lua" />
+		<script name="ActionStrain" file="scripts/manager_action_strain.lua" />
 		<script name="CharWeaponManagerTT" file="scripts/manager_char_weapon_tt.lua" />
 		<script name="CharManagerTT" file="scripts/manager_char.lua" />
 		<script name="OptionsTT" file="scripts/talent_options.lua" />

@@ -1,9 +1,4 @@
-OOB_MSGTYPE_APPLYSTRAIN = "applystrain";
-OOB_MSGTYPE_OPENSTRAINTRACKER = "openstraintracker";
-
 function onInit()
-	OOBManager.registerOOBMsgHandler(OOB_MSGTYPE_APPLYSTRAIN, handleApplyStrain);
-	OOBManager.registerOOBMsgHandler(OOB_MSGTYPE_OPENSTRAINTRACKER, handleOpenStrainTracker);
 	ActionsManager.registerModHandler("manifest", modManifest);
 	ActionsManager.registerResultHandler("manifest", onManifest)
 end
@@ -30,6 +25,40 @@ function getRoll(draginfo, rActor, rAction)
 end
 
 function modManifest(rSource, rTarget, rRoll)
+	if rSource then
+		local aAddDesc = {};
+		local aAddDice = {};
+		local nAddMod = 0;
+		local nEffectCount = 0;
+		aAddDice, nAddMod, nEffectCount = EffectManager5E.getEffectsBonus(rSource, {"MANIFEST"}, false);
+		if (nEffectCount > 0) then
+			bEffects = true;
+		end
+
+		-- If effects happened, then add note
+		if bEffects then
+			local sEffects = "";
+			local sMod = StringManager.convertDiceToString(aAddDice, nAddMod, true);
+			if sMod ~= "" then
+				sEffects = "[" .. Interface.getString("effects_tag") .. " " .. sMod .. "]";
+			else
+				sEffects = "[" .. Interface.getString("effects_tag") .. "]";
+			end
+			table.insert(aAddDesc, sEffects);
+		end
+		if #aAddDesc > 0 then
+			rRoll.sDesc = rRoll.sDesc .. " " .. table.concat(aAddDesc, " ");
+		end
+		ActionsManager2.encodeDesktopMods(rRoll);
+		for _,vDie in ipairs(aAddDice) do
+			if vDie:sub(1,1) == "-" then
+				table.insert(rRoll.aDice, "-p" .. vDie:sub(3));
+			else
+				table.insert(rRoll.aDice, "p" .. vDie:sub(2));
+			end
+		end
+		rRoll.nMod = rRoll.nMod + nAddMod;
+	end
 end
 
 function onManifest(rSource, rTarget, rRoll)
@@ -38,87 +67,23 @@ function onManifest(rSource, rTarget, rRoll)
 	local nOrder = tonumber(rRoll.sDesc:match("%[ORDER: (%d-)%]") or "0");
 	rMessage.text = string.gsub(rMessage.text, " %[ORDER:[^]]*%]", "");
 
+	local sResult = "SUCCESS";
+	local nStrain = 0;
+	if nTotal == nOrder then
+		sResult = "PARTIAL SUCCESS";
+		nStrain = 1;
+	elseif nTotal < nOrder then
+		sResult = "FAILURE";
+		nStrain = nOrder;
+	end
+
+	rMessage.text = rMessage.text .. " -> " .. StringManager.capitalize(sResult);
 	Comm.deliverChatMessage(rMessage);
 
-	if nTotal <= nOrder then
-		local sResult = "PARTIAL SUCCESS";
-		local nStrain = 1;
-		if nTotal < nOrder then
-			sResult = "FAILURE";
-			nStrain = nOrder;
-		end
-		notifyApplyStrain(rSource, rTarget, nStrain, sResult)
-	end
-end
-
---------------------------------------
--- ADD STRAIN
---------------------------------------
-
-function notifyApplyStrain(rSource, rTarget, nStrain, sResult)
-	if not rSource then
-		return;
-	end
-
-	local msgOOB = {};
-	msgOOB.type = OOB_MSGTYPE_APPLYSTRAIN;
-	msgOOB.nStrain = nStrain;
-	msgOOB.sResult = sResult
-	msgOOB.sSourceNode = ActorManager.getCreatureNodeName(rSource);
-
-	Comm.deliverOOBMessage(msgOOB, "");
-end
-
-function handleApplyStrain(msgOOB)
-	local rSource = ActorManager.resolveActor(msgOOB.sSourceNode);
-	local nStrain = tonumber(msgOOB.nStrain) or 0;
-	applyStrain(rSource, nStrain, msgOOB.sResult);
-end
-
-function applyStrain(rSource, nStrain, sResult)
-	StrainManager.addStrainToApply(rSource, nStrain);
-	notifyOpenStrainTracker(rSource);
-	messageApplyStrain(rSource, nStrain, sResult);
-end
-
-function messageApplyStrain(rSource, nStrain, sResult)
-	local msgShort = {font = "msgfont"};
-	local msgLong = {font = "msgfont"};
-	
-	msgShort.text = "Strain [" .. nStrain .. "]";
-	msgLong.text = "Strain [" .. nStrain .. "] -> " .. ActorManager.getDisplayName(rSource) .. " [" .. sResult .. "]";
-	
-	msgShort.icon = "roll_damage";
-	msgLong.icon = "roll_damage";
-		
-	ActionsManager.outputResult(false, rSource, nil, msgLong, msgShort);
-end
-
---------------------------------------
--- OPEN STRAIN TRACKER
---------------------------------------
-
-function notifyOpenStrainTracker(rSource)
-	local sUser = getUser(rSource);
-	
-	local msgOOB = {};
-	msgOOB.type = OOB_MSGTYPE_OPENSTRAINTRACKER;
-	msgOOB.sSourceNode = rSource.sCreatureNode;
-
-	Comm.deliverOOBMessage(msgOOB, sUser);
-end
-
-function handleOpenStrainTracker(msgOOB)
-	if OptionsManager.isOption("POPUPSTRAIN", "on") then
-		Interface.openWindow("straintracker", msgOOB.sSourceNode);
-	end
-end
-
-function getUser(rSource)
-	for _,sIdentity in pairs(User.getAllActiveIdentities()) do
-		local sName = User.getIdentityLabel(sIdentity);
-		if sName == rSource.sName then
-			return User.getIdentityOwner(sIdentity)
-		end
-	end
+	-- Initiate Strain roll
+	rAction = {};
+	rAction.label = rRoll.sDesc:match("%[MANIFEST%] ([^[]*) %[");
+	rAction.sResult = sResult;
+	rAction.nMod = nStrain;
+	ActionStrain.performRoll(nil, rSource, rTarget, rAction);
 end
