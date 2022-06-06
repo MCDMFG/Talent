@@ -3,9 +3,9 @@
 	<announcement text="Loaded Talent" font="emotefont" />
 	<properties>
 		<name>The Talent</name>
-		<version>1.3-alpha</version>
+		<version>1.6-alpha</version>
 		<author>Shane Parker and George Taray</author>
-		<description>Support for MCDM's Talent class (ext v1.3-alpha)</description>
+		<description>Support for MCDM's Talent class (ext v1.6-alpha)</description>
 		<ruleset>
 			<name>5E</name>
 		</ruleset>

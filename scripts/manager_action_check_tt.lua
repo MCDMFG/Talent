@@ -24,7 +24,7 @@ function getRoll(rActor, sCheck, nTargetDC, bSecretRoll)
 		bStrain = true;
 		bDIS = true;
 	end
-	if StrainManager.isAtOrAboveStrainLevel(rActor, "souls", 2) and (sCheck == "wisdom" or sCheck == "charisma") then
+	if StrainManager.isAtOrAboveStrainLevel(rActor, "soul", 2) and (sCheck == "wisdom" or sCheck == "charisma") then
 		bStrain = true;
 		bDIS = true;
 	end
