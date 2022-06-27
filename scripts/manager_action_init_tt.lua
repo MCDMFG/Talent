@@ -8,14 +8,7 @@ end
 function getRoll(rActor, bSecretRoll)
 	local rRoll = fGetRollOriginal(rActor, bSecretRoll)
 
-	local sNodeType, nodeActor = ActorManager.getTypeAndNode(rActor);
-	if nodeActor then
-		if sNodeType == "pc" then
-			if StrainManager.isAtOrAboveStrainLevel(rActor, "body", 2) then
-				rRoll.sDesc = rRoll.sDesc .. " [DIS] [STRAIN]";
-			end
-		end
-	end
+	StrainManager.modifyRollWithStrainImpact(rActor, rRoll, "init");
 
 	return rRoll;
 end

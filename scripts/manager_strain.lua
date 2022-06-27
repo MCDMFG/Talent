@@ -176,3 +176,109 @@ function shouldIgnoreStrainPenalties(rActor, sStrainType, nStrainLevel, rFilterA
 	end
 	return bResult;
 end
+
+function getStrainImpact(rActor, sCategory, sFilter)
+	local aImpact = {
+		bDisadvantage = false,
+		nModifier = 0,
+		bRemoveProf = false
+	};
+	
+	for sStrainType,aStrainLevels in pairs(TalentData.strain) do
+		local nCurStrain = getCurrentStrain(rActor, sStrainType);
+
+		for nStrainLevel,aStrainData in pairs(aStrainLevels) do
+			if nCurStrain >= nStrainLevel then
+				local impact = aStrainData.impact[sCategory]
+				if impact then
+					if (not impact.filters) or StringManager.contains(impact.filters, sFilter) then
+						if impact.type == "disadvantage" then
+							aImpact.bDisadvantage = true;
+						elseif impact.type == "modifier" then
+							aImpact.nModifier = aImpact.nModifier + impact.value;
+						elseif impact.type == "proficiency" then
+							aImpact.bRemoveProf = true;
+						end
+					end
+				end
+			end
+		end
+	end
+
+	return aImpact;
+end
+
+function modifyRollWithStrainImpact(rActor, rRoll, sRollType, sFilter, vData)
+	if ActorManager.isPC(rActor) then
+		local bStrain = false;
+		local bDIS = false;
+
+		if rRoll.sDesc:match(" %[DIS%]") then
+			bDIS = true;
+			rRoll.sDesc = rRoll.sDesc:gsub(" %[DIS%]", "");
+		end
+
+		local aImpact = StrainManager.getStrainImpact(rActor, sRollType, sFilter)
+		-- Debug.chat('impact', aImpact);
+
+		if aImpact.bDisadvantage then
+			bDIS = true;
+			bStrain = true;
+		end
+
+		if aImpact.nModifier ~= 0 then
+			rRoll.nMod = rRoll.nMod + aImpact.nModifier;
+			bStrain = true;
+		end
+
+		if aImpact.bRemoveProf then
+			local nPenalty = 0;
+			local nProf = DB.getValue(DB.findNode(rActor.sCreatureNode), "profbonus", 0);
+
+			-- Death saves can't have prof bonus modified
+			if sRollType == "check" then
+				-- vData should be the skill node for skill checks
+				if vData then
+					local nProfUsed = DB.getValue(vData, "prof", 0);
+
+					if nProfUsed == 1 then
+						nPenalty = nProf;
+						rRoll.sDesc = rRoll.sDesc:gsub(" %[PROF%]", "");		
+					elseif nProfUsed == 2 then
+						nPenalty =  (2 * nProf);
+						rRoll.sDesc = rRoll.sDesc:gsub(" %[PROF x2%]", "");		
+					end
+				end
+			
+			-- There's no way to check if initiative is rolled with proficiency
+			-- So there's no way to automate this except by brute force
+			elseif sRollType == "init" then
+
+			elseif sRollType == "save" and sFilter ~= "death" then
+				if DB.getValue(nodeActor, "abilities." .. sFilter .. ".saveprof", 0) == 1 then
+					nPenalty = nProf;
+				end
+			
+			elseif sRollType == "attack" then
+				-- vData is rAction
+				if vData and vData.bProf then 
+					nPenalty = nProf;
+				end
+			end
+
+			if nPenalty ~= 0 then
+				rRoll.nMod = rRoll.nMod - nPenalty;
+				bStrain = true;
+			end
+		end
+
+		if bDIS then
+			rRoll.sDesc = rRoll.sDesc .. " [DIS]";
+		end
+		if bStrain then
+			rRoll.sDesc = rRoll.sDesc .. " [STRAIN]";
+		end
+	end
+
+	return rRoll;
+end
