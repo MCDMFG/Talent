@@ -219,7 +219,6 @@ function modifyRollWithStrainImpact(rActor, rRoll, sRollType, sFilter, vData)
 		end
 
 		local aImpact = StrainManager.getStrainImpact(rActor, sRollType, sFilter)
-		-- Debug.chat('impact', aImpact);
 
 		if aImpact.bDisadvantage then
 			bDIS = true;
