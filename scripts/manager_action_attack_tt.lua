@@ -5,10 +5,10 @@ function onInit()
 	fGetRollOriginal = ActionAttack.getRoll;
 	ActionAttack.getRoll = getRoll;
 
-	fModAttackOriginal = ActionAttack.modAttack;
-	ActionAttack.modAttack = modAttack;
+	-- fModAttackOriginal = ActionAttack.modAttack;
+	-- ActionAttack.modAttack = modAttack;
 	
-	ActionsManager.registerModHandler("attack", modAttack);
+	--ActionsManager.registerModHandler("attack", modAttack);
 end
 
 function getRoll(rActor, rAction)
